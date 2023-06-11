@@ -11,7 +11,42 @@
 		51059DC12A34C06500128E53 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51059DC02A34C06500128E53 /* ContentView.swift */; };
 		51059DC32A34C06500128E53 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 51059DC22A34C06500128E53 /* Assets.xcassets */; };
 		51059DC62A34C06500128E53 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 51059DC52A34C06500128E53 /* Preview Assets.xcassets */; };
+		51059DD32A34C12100128E53 /* expenseTrackerWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51059DD22A34C12100128E53 /* expenseTrackerWatchApp.swift */; };
+		51059DD52A34C12100128E53 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51059DD42A34C12100128E53 /* ContentView.swift */; };
+		51059DD72A34C12300128E53 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 51059DD62A34C12300128E53 /* Assets.xcassets */; };
+		51059DDA2A34C12300128E53 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 51059DD92A34C12300128E53 /* Preview Assets.xcassets */; };
+		51059DDD2A34C12300128E53 /* expenseTrackerWatch Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 51059DD02A34C12100128E53 /* expenseTrackerWatch Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		51059DE62A34DA0700128E53 /* WatchNumpadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51059DE52A34DA0700128E53 /* WatchNumpadView.swift */; };
+		51BF5EEB2A350402002EB231 /* ExpenseTracker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 51BF5EE92A350402002EB231 /* ExpenseTracker.xcdatamodeld */; };
+		51BF5EEC2A350402002EB231 /* ExpenseTracker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 51BF5EE92A350402002EB231 /* ExpenseTracker.xcdatamodeld */; };
+		51BF5EEE2A3504F8002EB231 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BF5EED2A3504F8002EB231 /* DataController.swift */; };
+		51BF5EF02A353181002EB231 /* WatchCommunication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BF5EEF2A353181002EB231 /* WatchCommunication.swift */; };
+		51BF5EF22A353724002EB231 /* WatchCommunication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BF5EEF2A353181002EB231 /* WatchCommunication.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		51059DDB2A34C12300128E53 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 51059DB32A34C06500128E53 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 51059DCF2A34C12100128E53;
+			remoteInfo = "expenseTrackerWatch Watch App";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		51059DE12A34C12300128E53 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				51059DDD2A34C12300128E53 /* expenseTrackerWatch Watch App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		51059DBB2A34C06500128E53 /* expenseTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = expenseTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -19,10 +54,26 @@
 		51059DC02A34C06500128E53 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		51059DC22A34C06500128E53 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		51059DC52A34C06500128E53 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		51059DD02A34C12100128E53 /* expenseTrackerWatch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "expenseTrackerWatch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		51059DD22A34C12100128E53 /* expenseTrackerWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = expenseTrackerWatchApp.swift; sourceTree = "<group>"; };
+		51059DD42A34C12100128E53 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		51059DD62A34C12300128E53 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		51059DD92A34C12300128E53 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		51059DE52A34DA0700128E53 /* WatchNumpadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchNumpadView.swift; sourceTree = "<group>"; };
+		51BF5EEA2A350402002EB231 /* ExpenseTracker.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ExpenseTracker.xcdatamodel; sourceTree = "<group>"; };
+		51BF5EED2A3504F8002EB231 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		51BF5EEF2A353181002EB231 /* WatchCommunication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchCommunication.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		51059DB82A34C06500128E53 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		51059DCD2A34C12100128E53 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -35,7 +86,10 @@
 		51059DB22A34C06500128E53 = {
 			isa = PBXGroup;
 			children = (
+				51BF5EE92A350402002EB231 /* ExpenseTracker.xcdatamodeld */,
+				51BF5EEF2A353181002EB231 /* WatchCommunication.swift */,
 				51059DBD2A34C06500128E53 /* expenseTracker */,
+				51059DD12A34C12100128E53 /* expenseTrackerWatch Watch App */,
 				51059DBC2A34C06500128E53 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -44,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				51059DBB2A34C06500128E53 /* expenseTracker.app */,
+				51059DD02A34C12100128E53 /* expenseTrackerWatch Watch App.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -53,6 +108,7 @@
 			children = (
 				51059DBE2A34C06500128E53 /* expenseTrackerApp.swift */,
 				51059DC02A34C06500128E53 /* ContentView.swift */,
+				51BF5EED2A3504F8002EB231 /* DataController.swift */,
 				51059DC22A34C06500128E53 /* Assets.xcassets */,
 				51059DC42A34C06500128E53 /* Preview Content */,
 			);
@@ -67,6 +123,26 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		51059DD12A34C12100128E53 /* expenseTrackerWatch Watch App */ = {
+			isa = PBXGroup;
+			children = (
+				51059DD22A34C12100128E53 /* expenseTrackerWatchApp.swift */,
+				51059DE52A34DA0700128E53 /* WatchNumpadView.swift */,
+				51059DD42A34C12100128E53 /* ContentView.swift */,
+				51059DD62A34C12300128E53 /* Assets.xcassets */,
+				51059DD82A34C12300128E53 /* Preview Content */,
+			);
+			path = "expenseTrackerWatch Watch App";
+			sourceTree = "<group>";
+		};
+		51059DD82A34C12300128E53 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				51059DD92A34C12300128E53 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -77,14 +153,33 @@
 				51059DB72A34C06500128E53 /* Sources */,
 				51059DB82A34C06500128E53 /* Frameworks */,
 				51059DB92A34C06500128E53 /* Resources */,
+				51059DE12A34C12300128E53 /* Embed Watch Content */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				51059DDC2A34C12300128E53 /* PBXTargetDependency */,
+			);
+			name = expenseTracker;
+			productName = expenseTracker;
+			productReference = 51059DBB2A34C06500128E53 /* expenseTracker.app */;
+			productType = "com.apple.product-type.application";
+		};
+		51059DCF2A34C12100128E53 /* expenseTrackerWatch Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 51059DDE2A34C12300128E53 /* Build configuration list for PBXNativeTarget "expenseTrackerWatch Watch App" */;
+			buildPhases = (
+				51059DCC2A34C12100128E53 /* Sources */,
+				51059DCD2A34C12100128E53 /* Frameworks */,
+				51059DCE2A34C12100128E53 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = expenseTracker;
-			productName = expenseTracker;
-			productReference = 51059DBB2A34C06500128E53 /* expenseTracker.app */;
+			name = "expenseTrackerWatch Watch App";
+			productName = "expenseTrackerWatch Watch App";
+			productReference = 51059DD02A34C12100128E53 /* expenseTrackerWatch Watch App.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -98,6 +193,9 @@
 				LastUpgradeCheck = 1410;
 				TargetAttributes = {
 					51059DBA2A34C06500128E53 = {
+						CreatedOnToolsVersion = 14.1;
+					};
+					51059DCF2A34C12100128E53 = {
 						CreatedOnToolsVersion = 14.1;
 					};
 				};
@@ -116,6 +214,7 @@
 			projectRoot = "";
 			targets = (
 				51059DBA2A34C06500128E53 /* expenseTracker */,
+				51059DCF2A34C12100128E53 /* expenseTrackerWatch Watch App */,
 			);
 		};
 /* End PBXProject section */
@@ -130,6 +229,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		51059DCE2A34C12100128E53 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				51059DDA2A34C12300128E53 /* Preview Assets.xcassets in Resources */,
+				51059DD72A34C12300128E53 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -137,12 +245,35 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				51BF5EF02A353181002EB231 /* WatchCommunication.swift in Sources */,
+				51BF5EEE2A3504F8002EB231 /* DataController.swift in Sources */,
 				51059DC12A34C06500128E53 /* ContentView.swift in Sources */,
 				51059DBF2A34C06500128E53 /* expenseTrackerApp.swift in Sources */,
+				51BF5EEB2A350402002EB231 /* ExpenseTracker.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		51059DCC2A34C12100128E53 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				51BF5EF22A353724002EB231 /* WatchCommunication.swift in Sources */,
+				51059DE62A34DA0700128E53 /* WatchNumpadView.swift in Sources */,
+				51059DD52A34C12100128E53 /* ContentView.swift in Sources */,
+				51BF5EEC2A350402002EB231 /* ExpenseTracker.xcdatamodeld in Sources */,
+				51059DD32A34C12100128E53 /* expenseTrackerWatchApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		51059DDC2A34C12300128E53 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 51059DCF2A34C12100128E53 /* expenseTrackerWatch Watch App */;
+			targetProxy = 51059DDB2A34C12300128E53 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		51059DC72A34C06500128E53 /* Debug */ = {
@@ -262,6 +393,7 @@
 		51059DCA2A34C06500128E53 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -291,6 +423,7 @@
 		51059DCB2A34C06500128E53 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -317,6 +450,66 @@
 			};
 			name = Release;
 		};
+		51059DDF2A34C12300128E53 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"expenseTrackerWatch Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = MKB4K8L5MQ;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = expenseTrackerWatch;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = ca.masonx.expenseTracker;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.masonx.expenseTracker.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 9.1;
+			};
+			name = Debug;
+		};
+		51059DE02A34C12300128E53 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"expenseTrackerWatch Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = MKB4K8L5MQ;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = expenseTrackerWatch;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = ca.masonx.expenseTracker;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.masonx.expenseTracker.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 9.1;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -338,7 +531,29 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		51059DDE2A34C12300128E53 /* Build configuration list for PBXNativeTarget "expenseTrackerWatch Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				51059DDF2A34C12300128E53 /* Debug */,
+				51059DE02A34C12300128E53 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		51BF5EE92A350402002EB231 /* ExpenseTracker.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				51BF5EEA2A350402002EB231 /* ExpenseTracker.xcdatamodel */,
+			);
+			currentVersion = 51BF5EEA2A350402002EB231 /* ExpenseTracker.xcdatamodel */;
+			path = ExpenseTracker.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 51059DB32A34C06500128E53 /* Project object */;
 }
