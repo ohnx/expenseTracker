@@ -6,24 +6,30 @@
 //
 
 import SwiftUI
+import Combine
 
 struct ContentView: View {
     // local state
     @State private var category: String = ""
     @State private var description: String = ""
-    @State private var amount: String = ""
     @Environment(\.presentationMode) var presentationMode
+    @State private var path = NavigationPath()
 
     // phone communication manager
     @StateObject var commsMgr = CommunicationManager()
 
+    // weird combine stuff for messaging
+    let entrySubmitted = PassthroughSubject<Float, Never>()
+    
     var body: some View {
         // super cursed
-        NavigationStack {
+        NavigationStack(path: $path) {
             VStack {
                 TextField("Description", text: $description)
                 Spacer()
-                NavigationLink {
+                NavigationLink(value: "category") {
+                    Text("Next")
+                }.navigationDestination(for: String.self) { _ in
                     VStack {
                         Picker("Category", selection: $category) {
                             Text("(none)").tag("").foregroundColor(.secondary)
@@ -34,22 +40,26 @@ struct ContentView: View {
                             .pickerStyle(InlinePickerStyle())
                         NavigationLink {
                             VStack {
-                                WatchNumpad { value in
-                                    commsMgr.sendExpense(SerializedExpense(amount: value, desc: description, date: Date(), categoryId: category))
-                                    // TODO: view doesn't dismiss
-                                    self.presentationMode.wrappedValue.dismiss()
-                                }
+                                WatchNumpad(entrySubmitted)
                             }
                         } label: {
                             Text("Next")
                         }
                     }
-                } label: {
-                    Text("Next")
                 }
             }
             .padding()
             .navigationTitle(Text("Expense Tracker"))
+        }.onReceive(entrySubmitted) { value in
+            // send expense to watch
+            commsMgr.sendExpense(SerializedExpense(amount: value, desc: description, date: Date(), categoryId: category))
+
+            // clear values
+            self.description = ""
+            self.category = ""
+
+            // dismiss view
+            self.path.removeLast(self.path.count)
         }
     }
 }

@@ -116,6 +116,7 @@ class WatchSessionDelegate: NSObject, WCSessionDelegate {
         let encoder = JSONEncoder()
         if let encodedData = try? encoder.encode(expense) {
             session?.sendMessage(["expense": encodedData], replyHandler: nil) { error in
+                // TODO: bubble this up to the user in some way
                 print(error.localizedDescription)
             }
         }

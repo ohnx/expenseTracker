@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct NumpadButton: View {
     private var value: String
@@ -96,12 +97,12 @@ struct NumpadDeleteButton: View {
 
 struct WatchNumpad: View {
     @State private var entry: String = ""
-    private var decimalPoint: String
-    private let callback: (Float) -> Void
+    private let decimalPoint: String
+    let parentSubject: PassthroughSubject<Float, Never>?
     
-    public init(_ callback: @escaping (Float) -> Void) {
-        self.callback = callback
+    public init(_ parentSubject: PassthroughSubject<Float, Never>? = nil) {
         self.decimalPoint = NumberFormatter().decimalSeparator ?? "."
+        self.parentSubject = parentSubject
     }
     
     var body: some View {
@@ -147,7 +148,7 @@ struct WatchNumpad: View {
                 NumpadButton("0", entry: $entry, isZero: ())
                 NumpadButton(decimalPoint, entry: $entry, isDecimalPoint: ())
                 Button {
-                    callback(Float(entry) ?? 0)
+                    parentSubject?.send(Float(entry) ?? 0)
                 } label: {
                     Image(systemName: "plus.circle")
                         .font(.title3)
@@ -161,8 +162,6 @@ struct WatchNumpad: View {
 
 struct WatchNumpad_Previews: PreviewProvider {
     static var previews: some View {
-        WatchNumpad() { _ in
-            
-        }
+        WatchNumpad()
     }
 }
