@@ -156,6 +156,9 @@ struct PreferencesView: View {
     @State private var presentAlert = false
     @State private var presentDeleteConfirm = false
 
+    // more things for sharing
+    @State private var shareItem: String = ""
+
     var body: some View {
         List() {
             Section(header: Text("Manage Categories"), footer: Text("Expenses are organized by these categories. Categories are displayed in order of creation. Tap on a category to modify its name, and swipe to delete. Modifying a category's name will update the corresponding category name for all other expenses. Deleting a category will set all expenses in that category to the unsorted category.")) {
@@ -192,19 +195,16 @@ struct PreferencesView: View {
             .headerProminence(.increased)
             
             Section(header: Text("Miscellaneous")) {
+                // reallyawful and hacky way to do it, but i couldn't get sharelink working in any other way
+                // and i was too lazy to drop back to uiviewcontroller/outside of swiftui
+                if shareItem != "" {
+                    ShareLink("Export CSV", item: shareItem, preview: SharePreview("exported CSV", image: Image(systemName: "doc.text")))
+                }
+
                 Button() {
-                    print("TODO")
-                    
-                    DispatchQueue.global().async {
-                        print("todo: do compute here?")
-                        
-                        DispatchQueue.main.async {
-                            // TODO: actually implement this
-                            print("todo: display the share sheet or whatever here")
-                        }
-                    }
+                    exportExpenses()
                 } label: {
-                    Label("Export CSV", systemImage: "square.and.arrow.up")
+                    Label("Prepare CSV export", systemImage: "arrow.triangle.2.circlepath")
                 }
 
                 if commsMgr.initializedSucessfully {
@@ -282,6 +282,42 @@ struct PreferencesView: View {
     func deleteExpenseCategory(_ expenseCategory: ExpenseCategory) {
         moc.delete(expenseCategory)
         try? moc.save()
+    }
+    
+    func sanitizeForCsv(_ str: String) -> String {
+        var sanitizedValue = str
+
+        // Check if the value contains double quotes
+        if sanitizedValue.contains("\"") {
+            // Escape double quotes by doubling them
+            sanitizedValue = sanitizedValue.replacingOccurrences(of: "\"", with: "\"\"")
+        }
+
+        // Check if the value contains special characters or starts/ends with whitespace
+        let containsSpecialCharacters = sanitizedValue.rangeOfCharacter(from: .init(charactersIn: ",\n\r\"")) != nil
+        let startsOrEndsWithWhitespace = sanitizedValue.trimmingCharacters(in: .whitespacesAndNewlines) != sanitizedValue
+
+        // Enclose the value in double quotes if necessary
+        if containsSpecialCharacters || startsOrEndsWithWhitespace {
+            sanitizedValue = "\"" + sanitizedValue + "\""
+        }
+
+        return sanitizedValue
+    }
+
+    func exportExpenses() {
+        var csvData = "timestamp,desc,category,amount\n"
+        let expensesConverted = expenses.map { expense in
+            let cols = [
+                String(Int(expense.date?.timeIntervalSince1970 ?? -1)),
+                sanitizeForCsv(expense.desc ?? ""),
+                sanitizeForCsv(expense.category?.displayName ?? ""),
+                String(format: "%.2f", expense.amount)
+            ]
+            return cols.joined(separator: ",")
+        }
+        csvData += expensesConverted.joined(separator: "\n")
+        shareItem = csvData
     }
 }
 
