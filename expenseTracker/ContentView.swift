@@ -76,7 +76,7 @@ struct ExpenseDetailView: View {
         var entry: ExpenseEditData
         if let expense = expense {
             // we can soft ignore errors here
-            entry = ExpenseEditData(amount: "\(expense.amount)", desc: expense.desc ?? "", date: expense.date ?? Date(), category: expense.category)
+            entry = ExpenseEditData(amount: String(format: "%.2f", expense.amount), desc: expense.desc ?? "", date: expense.date ?? Date(), category: expense.category)
         } else {
             // new expense
             entry = ExpenseEditData(amount: "", desc: "", date: Date())
@@ -101,7 +101,7 @@ struct ExpenseListView: View {
                         } label: {
                             HStack {
                                 VStack {
-                                    Text(expense.desc ?? "(unknown)")
+                                    Text((expense.desc ?? "").isEmpty ? " " : (expense.desc ?? ""))
                                         .font(.title3)
                                         .lineLimit(1)
                                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -154,6 +154,7 @@ struct PreferencesView: View {
     @State private var currentExpenseCategoryDisplay: String = ""
     @State private var currentExpenseCategory: ExpenseCategory?
     @State private var presentAlert = false
+    @State private var presentDeleteConfirm = false
 
     var body: some View {
         List() {
@@ -215,6 +216,13 @@ struct PreferencesView: View {
                         Label("Synchronize categories to Watch", systemImage: "arrow.triangle.2.circlepath")
                     }
                 }
+                
+                Button(role: .destructive) {
+                    presentDeleteConfirm = true
+                } label: {
+                    Label("Delete all expenses", systemImage: "trash")
+                        .foregroundColor(.red)
+                }
             }
             .headerProminence(.increased)
         }.alert(((currentExpenseCategory != nil) ? "Edit" : "New"), isPresented: $presentAlert) {
@@ -235,6 +243,15 @@ struct PreferencesView: View {
                 
                 // clear values
                 currentExpenseCategory = nil
+            }
+            Button("Cancel", role: .cancel) {}
+        }.alert("Clear all expenses?", isPresented: $presentDeleteConfirm) {
+            Button("Delete", role: .destructive) {
+                for expense in expenses {
+                    moc.delete(expense)
+                }
+                
+                try? moc.save()
             }
             Button("Cancel", role: .cancel) {}
         }.onReceive(commsMgr.dataSubject) { serializedExpense in
