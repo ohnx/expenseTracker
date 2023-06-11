@@ -51,15 +51,12 @@ class WatchSessionDelegate: NSObject, WCSessionDelegate {
     }
     
     func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
-        print("did receive message")
         DispatchQueue.main.async {
             // try to decode as serializedexpense
-            print("did receive message 2 \(message)")
             if let expenseData = message["expense"] as? Data {
                 let decoder = JSONDecoder()
                 if let expense = try? decoder.decode(SerializedExpense.self, from: expenseData) {
                     // broadcast this update
-                    print("todo: update??")
                     self.dataSubject.send(expense)
                 } else {
                     print("some sort of communication error :(")
@@ -118,7 +115,6 @@ class WatchSessionDelegate: NSObject, WCSessionDelegate {
     func sendExpense(_ expense: SerializedExpense) {
         let encoder = JSONEncoder()
         if let encodedData = try? encoder.encode(expense) {
-            print("Encoded data \(String(decoding: encodedData, as: UTF8.self))")
             session?.sendMessage(["expense": encodedData], replyHandler: nil) { error in
                 print(error.localizedDescription)
             }
@@ -128,63 +124,6 @@ class WatchSessionDelegate: NSObject, WCSessionDelegate {
 }
 
 #if os(iOS)
-class ExpenseAddSubscriber: Subscriber {
-    typealias Input = SerializedExpense
-    typealias Failure = Never
-    
-    // awful hack
-    lazy var dataContainer :NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "ExpenseTracker")
-        
-        container.loadPersistentStores { description, err in
-            if let err = err {
-                print("Core data load failed: \(err.localizedDescription)")
-            }
-        }
-
-        return container
-    }()
-
-    func receive(subscription: Subscription) {
-        subscription.request(.unlimited)
-    }
-    
-    func receive(_ serializedExpense: SerializedExpense) -> Subscribers.Demand {
-        // core data context
-        let moc = self.dataContainer.viewContext
-        let psc = self.dataContainer.persistentStoreCoordinator
-
-        // make the expense
-        let expense = Expense(context: moc)
-        expense.amount = serializedExpense.amount
-        expense.desc = serializedExpense.desc
-        expense.date = serializedExpense.date
-
-        // find the right category
-        if let categoryUrl = URL(string: serializedExpense.categoryId),
-           let catId = psc.managedObjectID(forURIRepresentation: categoryUrl),
-           let obj = try? moc.existingObject(with: catId),
-           let category = obj as? ExpenseCategory {
-            print("successfully found the category lmao \(category.debugDescription)")
-            expense.category = category
-        }
-        
-        // TODO: this is completely broken rn
-        print("adding expense!: \(expense)")
-        
-        // try saving?
-        DispatchQueue.main.async {
-            try? moc.save()
-        }
-
-        return .none
-    }
-    
-    func receive(completion: Subscribers.Completion<Never>) {
-        print("Completion event:", completion)
-    }
-}
-
 class CommunicationManager: ObservableObject {
     var session: WCSession?
     let delegate: WatchSessionDelegate?
@@ -197,9 +136,6 @@ class CommunicationManager: ObservableObject {
             let delegate = WatchSessionDelegate(dataSubject)
             self.session = session
             self.delegate = delegate
-
-            // get the data ready
-            dataSubject.subscribe(ExpenseAddSubscriber())
 
             session.delegate = delegate
             session.activate()
@@ -247,7 +183,6 @@ class CommunicationManager: ObservableObject {
         if let categoriesData = UserDefaults.standard.data(forKey: "categories"),
            let categories = try? decoder.decode([SerializedCategory].self, from: categoriesData) {
             // decode succeeded!
-            print("decoded categories!")
             dataSubject.send(categories)
         }
     }

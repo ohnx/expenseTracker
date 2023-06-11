@@ -237,6 +237,28 @@ struct PreferencesView: View {
                 currentExpenseCategory = nil
             }
             Button("Cancel", role: .cancel) {}
+        }.onReceive(commsMgr.dataSubject) { serializedExpense in
+            // core data context
+            let psc = moc.persistentStoreCoordinator
+
+            // make the expense
+            let expense = Expense(context: moc)
+            expense.amount = serializedExpense.amount
+            expense.desc = serializedExpense.desc
+            expense.date = serializedExpense.date
+
+            // find the right category
+            if let categoryUrl = URL(string: serializedExpense.categoryId),
+               let catId = psc?.managedObjectID(forURIRepresentation: categoryUrl),
+               let obj = try? moc.existingObject(with: catId),
+               let category = obj as? ExpenseCategory {
+                expense.category = category
+            }
+
+            // try saving?
+            DispatchQueue.main.async {
+                try? moc.save()
+            }
         }
     }
     
