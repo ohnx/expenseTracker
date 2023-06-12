@@ -22,6 +22,7 @@ struct ExpenseDetailView: View {
     }
     @State private var entry: ExpenseEditData
     private var expense: Expense?
+    private var isNew: Bool
 
     var body: some View {
         Form {
@@ -70,6 +71,12 @@ struct ExpenseDetailView: View {
                 }
             }
             .navigationTitle(expense != nil ? "Edit Expense" : "Add Expense")
+            .onAppear() {
+                if isNew {
+                    // update date on appear
+                    entry.date = Date()
+                }
+            }
     }
 
     public init(_ expense: Expense?) {
@@ -77,9 +84,11 @@ struct ExpenseDetailView: View {
         if let expense = expense {
             // we can soft ignore errors here
             entry = ExpenseEditData(amount: String(format: "%.2f", expense.amount), desc: expense.desc ?? "", date: expense.date ?? Date(), category: expense.category)
+            self.isNew = false
         } else {
             // new expense
             entry = ExpenseEditData(amount: "", desc: "", date: Date())
+            self.isNew = true
         }
         self._entry = State(initialValue: entry)
         self.expense = expense
